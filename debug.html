@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug Test</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Debug Test - If you see this, the basic HTML is working</h1>
+    <div id="vue-mount-test"></div>
+  </div>
+  
+  <script>
+    console.log('Basic script loading works');
+    document.getElementById('vue-mount-test').innerHTML = '<p style="color: green;">JavaScript is working</p>';
+  </script>
+  
+  <script type="module">
+    console.log('Module scripts are working');
+    try {
+      console.log('About to load the main Vue app...');
+      // Load the main app
+      fetch('/PhysicianQA/assets/index-BMNoGsMq.js')
+        .then(response => {
+          console.log('Vue app JS response:', response.status);
+          if (!response.ok) {
+            throw new Error('Failed to load Vue app JS');
+          }
+          return response.text();
+        })
+        .then(jsContent => {
+          console.log('Vue app JS loaded, length:', jsContent.length);
+          // Execute the Vue app
+          const script = document.createElement('script');
+          script.type = 'module';
+          script.textContent = jsContent;
+          document.head.appendChild(script);
+        })
+        .catch(error => {
+          console.error('Error loading Vue app:', error);
+          document.getElementById('vue-mount-test').innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+        });
+    } catch (error) {
+      console.error('Module script error:', error);
+    }
+  </script>
+</body>
+</html>
