@@ -38,8 +38,8 @@ export const PDF_OPTIONS = {
 // Default values for form fields
 export const DEFAULT_VALUES = {
   doctors: ['Dr. Wheatley', 'Dr. Hamlett', 'Dr. Hutchins'],
-  numberMin: 1,
-  numberMax: 10,
+  numberMin: 47001,
+  numberMax: 50010,
   pdfCount: 5
 };
 
