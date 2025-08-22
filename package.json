@@ -10,15 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.0",
-    "vuetify": "^3.4.0",
     "@mdi/font": "^7.3.0",
-    "pdf-lib": "^1.17.1",
+    "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
-    "file-saver": "^2.0.5"
+    "pdf-lib": "^1.17.1",
+    "vue": "^3.4.0",
+    "vuetify": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
+    "terser": "^5.43.1",
     "vite": "^5.0.0",
     "vite-plugin-pwa": "^0.17.0",
     "vite-plugin-vuetify": "^2.0.0"

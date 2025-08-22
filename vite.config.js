@@ -6,23 +6,18 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   base: "/PhysicianQA/",
   build: {
-    // Disable minification to avoid eval usage
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
+        drop_console: false,
         drop_debugger: true,
       },
-      mangle: {
-        safari10: true,
-      },
     },
-    // Ensure CSP compatibility
     rollupOptions: {
       output: {
         manualChunks: undefined,
-      }
-    }
+      },
+    },
   },
   plugins: [
     vue(),
@@ -68,11 +63,12 @@ export default defineConfig({
       }
     })
   ],
-  esbuild: {
-    // Ensure no eval usage for CSP compatibility
-    keepNames: true,
-  },
   define: {
     __VUE_PROD_DEVTOOLS__: false,
-  }
+    __VUE_OPTIONS_API__: true,
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
 })
