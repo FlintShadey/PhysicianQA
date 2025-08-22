@@ -9,20 +9,33 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: false,
+        drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'],
       },
     },
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('vuetify')) return 'vuetify';
+            if (id.includes('pdf-lib')) return 'pdf';
+            if (id.includes('vue')) return 'vue';
+            return 'vendor';
+          }
+        },
       },
     },
+    chunkSizeWarningLimit: 500,
   },
   plugins: [
     vue(),
     vuetify({
       autoImport: true,
+      treeshake: true,
+      theme: {
+        defaultTheme: 'light'
+      }
     }),
     VitePWA({
       registerType: 'autoUpdate',
