@@ -4,7 +4,7 @@ import vuetify from 'vite-plugin-vuetify'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: "/PhysicianQA/",
+  base: "./",
   build: {
     minify: 'terser',
     terserOptions: {
