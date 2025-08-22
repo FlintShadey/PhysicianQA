@@ -79,20 +79,27 @@ export default {
   data() {
     return {
       doctors: [...this.modelValue],
-      draggedIndex: null
+      draggedIndex: null,
+      isUpdatingFromParent: false
     }
   },
   watch: {
     modelValue: {
       handler(newValue) {
-        this.doctors = [...newValue];
+        if (!this.isUpdatingFromParent) {
+          this.doctors = [...newValue];
+        }
       },
       deep: true
     },
     doctors: {
       handler(newValue) {
+        this.isUpdatingFromParent = true;
         this.$emit('update:modelValue', newValue);
         this.$emit('update', newValue);
+        this.$nextTick(() => {
+          this.isUpdatingFromParent = false;
+        });
       },
       deep: true
     }

@@ -213,6 +213,10 @@ export default {
       deferredPrompt: null,
       showInstallPrompt: false,
       
+      // Event listener references for cleanup
+      beforeInstallPromptHandler: null,
+      appInstalledHandler: null,
+      
       // Snackbar
       snackbar: {
         show: false,
@@ -252,6 +256,16 @@ export default {
   mounted() {
     this.loadSettings();
     this.setupPWA();
+  },
+  
+  beforeUnmount() {
+    // Clean up PWA event listeners
+    if (this.beforeInstallPromptHandler) {
+      window.removeEventListener('beforeinstallprompt', this.beforeInstallPromptHandler);
+    }
+    if (this.appInstalledHandler) {
+      window.removeEventListener('appinstalled', this.appInstalledHandler);
+    }
   },
   
   methods: {
@@ -413,16 +427,19 @@ export default {
     
     // PWA functionality
     setupPWA() {
-      window.addEventListener('beforeinstallprompt', (e) => {
+      this.beforeInstallPromptHandler = (e) => {
         e.preventDefault();
         this.deferredPrompt = e;
         this.showInstallPrompt = true;
-      });
+      };
       
-      window.addEventListener('appinstalled', () => {
+      this.appInstalledHandler = () => {
         this.showInstallPrompt = false;
         this.showSnackbar('App installed successfully!', 'success');
-      });
+      };
+      
+      window.addEventListener('beforeinstallprompt', this.beforeInstallPromptHandler);
+      window.addEventListener('appinstalled', this.appInstalledHandler);
     },
     
     async installPWA() {
