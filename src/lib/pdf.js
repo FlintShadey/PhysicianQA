@@ -8,7 +8,7 @@ import { PDF_FIELD_DESCRIPTIONS, PDF_OPTIONS, ERROR_MESSAGES } from '../config/p
  */
 export async function loadBasePDF() {
   try {
-    const response = await fetch('/PhysicianQA.pdf');
+    const response = await fetch('./PhysicianQA.pdf');
     if (!response.ok) {
       throw new Error(`Failed to load PDF: ${response.status} ${response.statusText}`);
     }
