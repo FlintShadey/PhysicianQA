@@ -8,11 +8,26 @@
   <link rel="icon" href="./assets/favicon-DfOUAMoH-DfOUAMoH-DfOUAMoH.ico">
   <link rel="apple-touch-icon" href="./assets/icon-192x192-1Hrfukqo-1Hrfukqo-1Hrfukqo.png">
   <meta name="theme-color" content="#1976D2">
-<link rel="manifest" href="./assets/manifest-B2j3S6Nq.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script>  
-<link rel="manifest" href="./assets/manifest-B2j3S6Nq.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script>  <script type="module" crossorigin src="./assets/index-EoRhjcuh.js"></script>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <script type="module" crossorigin src="./assets/index-EoRhjcuh.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BHewDmiX.css">
-<link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
+</head>
 <body>
   <div id="app"></div>
+  
+  <!-- Custom Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', {
+          scope: './'
+        }).then((registration) => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }).catch((error) => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
