@@ -4,7 +4,7 @@ import vuetify from "vite-plugin-vuetify";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(({ command }) => ({
-  base: command === "serve" ? "/" : "./",
+  base: command === "serve" ? "/" : "/PhysicianQA/",
   server: {
     host: true,
     port: 5173,
