@@ -8,6 +8,14 @@ yarn-error.log*
 dist/
 .vite/
 
+# Production build artifacts in root (should not be committed)
+/assets/
+/registerSW.js
+/sw.js
+/workbox-*.js
+/debug.html
+/manifest.webmanifest
+
 # Environment variables
 .env
 .env.local

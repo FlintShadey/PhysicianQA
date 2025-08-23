@@ -6,13 +6,13 @@
   "description": "PhysicianQA Filler - A Vue 3 PWA for filling PDF templates",
   "scripts": {
     "dev": "vite",
+    "dev:clean": "npm run clean:dev && vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean:dev": "rm -rf ./assets ./registerSW.js ./sw.js ./workbox-*.js ./debug.html ./manifest.webmanifest 2>/dev/null || true && cp index.development.html index.html"
   },
   "dependencies": {
     "@mdi/font": "^7.3.0",
-    "file-saver": "^2.0.5",
-    "jszip": "^3.10.1",
     "pdf-lib": "^1.17.1",
     "vue": "^3.4.0",
     "vuetify": "^3.4.0"
